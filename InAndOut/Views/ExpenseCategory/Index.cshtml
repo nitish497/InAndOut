@@ -1,0 +1,137 @@
+﻿@model List<ExpenseCategory>
+@{
+    ViewData["Title"] = "Expense Category";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Expense Category </h2>
+        </div>
+        <div class="col-6">
+            <a class="nav-link text-dark btn btn-primary w-75" asp-area="" asp-controller="ExpenseCategory" asp-action="Create"> Create New Expense Category</a>
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+			<tr>
+				<th>Expenses</th>
+				<th>Changes</th>
+
+			</tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="20%">@item.Name</td>
+                    @*<td>
+	                 @(await Component.InvokeAsync("Hellow", new { name = item.Name }))
+                    </td>*@
+                    <td width="40%">
+                        <div class="col-6 text-right">
+                            <a asp-controller="ExpenseCategory" asp-route-Id="@item.Id" asp-action="Update" class="btn btn-outline-warning mx-1">Update</a>
+                            <a asp-controller="ExpenseCategory" asp-route-Id="@item.Id" asp-action="Delete" class="btn btn-outline-danger mx-1">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+    @*<button onclick="getclick()">Get Vaccine Certificate</button>*@
+</div>
+@*<div class="container">
+    <h2>share</h2>
+    <!-- Trigger the modal with a button -->
+    <button data-toggle="modal" data-target="#myModal">
+        <i class="fa fa-share-alt" style="font-size:36px"></i>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <a href="#" class="fa fa-facebook" onclick="share()"></a>
+                                
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#" class="fa fa-twitter" onclick="shareOnTwitter()"></a>
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="#" class="fa fa-whatsapp"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>*@
+
+
+@*<script>
+
+    var curruntUrl = window.location.href;
+
+    function share()
+    {
+        const navUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + `${curruntUrl}`;
+        window.open(navUrl, '_blank');
+    }
+
+    function shareOnTwitter() {
+        const navUrl = 'https://twitter.com/intent/tweet?text=' + `${curruntUrl}`;
+        window.open(navUrl, '_blank');
+    }
+
+    function getclick() {
+		$.ajax({
+			url: "/ExpenseCategory/Getfile",
+			type: "POST"
+        }).done(function (result) {
+			let url=base64toPDF(result)
+			var link = document.createElement("a");
+			document.body.appendChild(link);
+            link.setAttribute("type", "hidden");
+			link.href = url;
+			link.target = "_blank"
+			link.click();
+			document.body.removeChild(link);
+		});
+    }
+	
+	function base64toPDF(data) {
+		var bufferArray = base64ToArrayBuffer(data);
+		var blobStore = new Blob([bufferArray], { type: "application/pdf" });
+        var data = window.URL.createObjectURL(blobStore);
+        return data;
+	}
+
+	function base64ToArrayBuffer(data) {
+		var bString = window.atob(data);
+		var bLength = bString.length;
+		var bytes = new Uint8Array(bLength);
+		for (var i = 0; i < bLength; i++) {
+			var ascii = bString.charCodeAt(i);
+			bytes[i] = ascii;
+		}
+		return bytes;
+	};
+    
+</script>*@

@@ -1,0 +1,44 @@
+﻿@model List<Item>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary"> Borrowed Items List </h2>
+        </div>
+        <div class="col-6">
+            <a class="nav-link text-dark btn btn-primary w-75" asp-area="" asp-controller="Item" asp-action="Create"> Create New Item</a> 
+        </div>
+    </div>
+    <br />
+    <table class="table table-bordered table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Borrower</th>
+                <th>Lender</th>
+                <th>Changes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td width="20%">@item.ItemName</td>
+                    <td width="20%">@item.Borrrower</td>
+                    <td width="20%">@item.Lender</td>
+                    <td width="40%">
+                        <div class="col-6 text-right">
+                            <a asp-controller="Item" asp-route-Id="@item.Id" asp-action="Update" class="btn btn-primary mx-1">Update</a>
+                            <a asp-controller="Item" asp-route-Id="@item.Id" asp-action="Delete" class="btn btn-danger mx-1">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+
+        </tbody>
+    </table>
+</div>
