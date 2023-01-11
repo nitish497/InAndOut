@@ -15,7 +15,6 @@ namespace InAndOut.Models
         public string Lender { get; set; }
         [DisplayName("Item Name")]
         public string ItemName { get; set; }
-        public string CastName { get; set; }
 
     }
 }
